@@ -2,24 +2,13 @@
 <html lang="tr">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no" />
 <title>Seni seviyorum Gülben</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#071029;--card:#0d1630;--text:#f7f9fc;--accent:#ff2d55;}
 *{box-sizing:border-box;margin:0;padding:0;}
-html,body{height:100%;width:100%;}
-body{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:10px;
-  font-family:Montserrat,system-ui,Arial;
-  color:var(--text);
-  background: radial-gradient(circle at 10% 10%, #09203a 0%, var(--bg) 45%);
-  flex-direction:column;
-  text-align:center;
-}
+html,body{height:100%;width:100%;font-family:Montserrat,system-ui,Arial;color:var(--text);background: radial-gradient(circle at 10% 10%, #09203a 0%, var(--bg) 45%);display:flex;justify-content:center;align-items:center;text-align:center;}
 
 .card{
   width:95%;
@@ -33,6 +22,27 @@ body{
   overflow:hidden;
 }
 
+/* Kalp arka plan */
+.heart-bg{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:80%;
+  max-width:300px;
+  aspect-ratio:1;
+  transform:translate(-50%,100%);
+  opacity:0.;
+  background:url('https://i.pinimg.com/originals/f8/f4/fc/f8f4fc13285f6a03b86278197ac11657.png') no-repeat center center;
+  background-size:contain;
+  z-index:0;
+  animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+  0%,100%{transform:translate(-50%,-50%) translateY(0);}
+  50%{transform:translate(-50%,-50%) translateY(-6px);}
+}
+
 h1{
   font-family:'Playfair Display', serif;
   margin-bottom:10px;
@@ -41,49 +51,12 @@ h1{
   gap:10px;
   align-items:center;
   font-weight:700;
+  position:relative;
+  z-index:1;
 }
 .line{white-space:nowrap;}
 
-/* Kalp animasyonu ve şekli */
-.heart-wrap{
-  width:36px;  /* küçültüldü */
-  height:36px;
-  display:inline-block;
-  position:relative;
-  transform-origin:center;
-  animation:float 3s ease-in-out infinite;
-}
-@keyframes float{0%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-6px) rotate(6deg)}100%{transform:translateY(0) rotate(-6deg)}}
-
-.heart{
-  position:relative;
-  width:36px;
-  height:32px;
-  background:var(--accent);
-  transform:rotate(-45deg);
-  transform-origin:center;
-  animation:beat 1000ms infinite;
-}
-.heart:before,
-.heart:after{
-  content:'';
-  position:absolute;
-  width:36px;
-  height:32px;
-  background:var(--accent);
-  border-radius:50%;
-}
-.heart:before{
-  top:-18px;
-  left:0;
-}
-.heart:after{
-  top:0;
-  left:18px;
-}
-@keyframes beat{0%{transform:rotate(-45deg) scale(1)}30%{transform:rotate(-45deg) scale(1.14)}45%{transform:rotate(-45deg) scale(0.98)}60%{transform:rotate(-45deg) scale(1.06)}100%{transform:rotate(-45deg) scale(1)}}
-
-.subtitle{margin:8px 0 16px;font-weight:300;opacity:0.95;font-size:14px;}
+.subtitle{margin:8px 0 16px;font-weight:300;opacity:0.95;font-size:14px;position:relative;z-index:1;}
 
 .quotes{
   height:100px;
@@ -93,6 +66,7 @@ h1{
   position:relative;
   overflow:hidden;
   margin:8px 0 16px;
+  z-index:1;
 }
 .quote{
   position:absolute;
@@ -106,12 +80,13 @@ h1{
   font-weight:500;
   line-height:1.35;
   font-family:Montserrat;
+  color:white;
 }
 .quote.show{opacity:1;transform:translate(-50%,-50%) translateY(0);}
 
-.divider{height:1px;width:70%;margin:8px auto 16px;background:linear-gradient(90deg,transparent,#ffffff20,transparent);}
+.divider{height:1px;width:70%;margin:8px auto 16px;background:linear-gradient(90deg,transparent,#ffffff20,transparent);position:relative; z-index:1;}
 
-.signature{margin-top:6px;}
+.signature{margin-top:6px;position:relative; z-index:1;}
 .sig-box{
   display:inline-block;
   padding:10px 18px;
@@ -123,29 +98,32 @@ h1{
 }
 .note{margin-top:6px;font-size:12px;color:rgba(255,255,255,0.6);}
 
-@media (max-width:480px){
+@media(max-width:480px){
   .quotes{height:120px}
   .quote{font-size:14px}
   .sig-box{font-size:16px}
+  .heart-bg{width:90%; max-width:200px;}
 }
 </style>
 </head>
 <body>
 <div class="card" role="main" aria-label="Sevgi mesajı">
+
+  <!-- Kalp arka plan -->
+  <div class="heart-bg"></div>
+
   <h1>
     <span class="line">Seni seviyorum Gülben</span>
-    <span class="heart-wrap" aria-hidden="false" title="kırmızı kalp">
-      <span class="heart"></span>
-    </span>
   </h1>
-  <p class="subtitle">Her saniye seni düşünüyorum kalbim seninle atıyor.</p>
+  <p class="subtitle">Her an seni düşünüyorum kalbim seninle atıyor.</p>
 
   <div class="quotes" aria-live="polite"></div>
+
   <div class="divider" aria-hidden="true"></div>
 
   <div class="signature">
     <div class="sig-box">Derviş</div>
-    <div class="note">Sevgilin</div>
+    <div class="note">Sevdiceğin.</div>
   </div>
 </div>
 
@@ -158,6 +136,7 @@ const quotes=[
   "Seninle geçen anlar şiir oluyor — ben kelimelerle yetinemiyorum.",
   "Hayatın tüm pusulası sensin; sezgilerinle yolumu aydınlatıyorsun."
 ];
+
 const container=document.querySelector('.quotes');
 const elems=quotes.map(text=>{
   const el=document.createElement('div');
@@ -166,16 +145,11 @@ const elems=quotes.map(text=>{
   container.appendChild(el);
   return el;
 });
+
 let idx=0;
 function showQuote(i){elems.forEach((el,j)=>el.classList.toggle('show',j===i));}
 showQuote(idx);
 setInterval(()=>{idx=(idx+1)%elems.length;showQuote(idx);},3500);
-
-const heart=document.querySelector('.heart');
-heart.addEventListener('click',()=>{
-  heart.style.animation='beat 600ms infinite';
-  setTimeout(()=>heart.style.animation='beat 1000ms infinite',1000);
-});
 </script>
 </body>
 </html>
