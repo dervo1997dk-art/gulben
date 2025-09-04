@@ -44,9 +44,10 @@ h1{
 }
 .line{white-space:nowrap;}
 
+/* Kalp animasyonu ve şekli */
 .heart-wrap{
-  width:44px;
-  height:44px;
+  width:36px;  /* küçültüldü */
+  height:36px;
   display:inline-block;
   position:relative;
   transform-origin:center;
@@ -55,27 +56,32 @@ h1{
 @keyframes float{0%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-6px) rotate(6deg)}100%{transform:translateY(0) rotate(-6deg)}}
 
 .heart{
-  width:44px;
-  height:44px;
-  display:inline-block;
-  background:var(--accent);
-  border-radius:28px;
   position:relative;
-  box-shadow:0 6px 15px rgba(255,45,85,0.22), inset 0 -5px 10px rgba(0,0,0,0.12);
+  width:36px;
+  height:32px;
+  background:var(--accent);
+  transform:rotate(-45deg);
+  transform-origin:center;
   animation:beat 1000ms infinite;
 }
-.heart:before,.heart:after{
+.heart:before,
+.heart:after{
   content:'';
   position:absolute;
-  width:44px;
-  height:44px;
-  border-radius:50%;
+  width:36px;
+  height:32px;
   background:var(--accent);
-  top:5px;
+  border-radius:50%;
 }
-.heart:before{left:22%;}
-.heart:after{left:78%;}
-@keyframes beat{0%{transform:scale(1)}30%{transform:scale(1.14)}45%{transform:scale(0.98)}60%{transform:scale(1.06)}100%{transform:scale(1)}}
+.heart:before{
+  top:-18px;
+  left:0;
+}
+.heart:after{
+  top:0;
+  left:18px;
+}
+@keyframes beat{0%{transform:rotate(-45deg) scale(1)}30%{transform:rotate(-45deg) scale(1.14)}45%{transform:rotate(-45deg) scale(0.98)}60%{transform:rotate(-45deg) scale(1.06)}100%{transform:rotate(-45deg) scale(1)}}
 
 .subtitle{margin:8px 0 16px;font-weight:300;opacity:0.95;font-size:14px;}
 
@@ -117,22 +123,10 @@ h1{
 }
 .note{margin-top:6px;font-size:12px;color:rgba(255,255,255,0.6);}
 
-#fullscreenBtn{
-  margin-top:10px;
-  padding:10px 18px;
-  font-size:15px;
-  border:none;
-  border-radius:8px;
-  background:var(--accent);
-  color:white;
-  cursor:pointer;
-}
-
 @media (max-width:480px){
   .quotes{height:120px}
   .quote{font-size:14px}
   .sig-box{font-size:16px}
-  #fullscreenBtn{font-size:14px;padding:8px 16px}
 }
 </style>
 </head>
@@ -153,8 +147,6 @@ h1{
     <div class="sig-box">Derviş</div>
     <div class="note">Sevgilin</div>
   </div>
-
-  <button id="fullscreenBtn">Tam Ekran</button>
 </div>
 
 <script>
@@ -183,15 +175,6 @@ const heart=document.querySelector('.heart');
 heart.addEventListener('click',()=>{
   heart.style.animation='beat 600ms infinite';
   setTimeout(()=>heart.style.animation='beat 1000ms infinite',1000);
-});
-
-const fullscreenBtn=document.getElementById('fullscreenBtn');
-fullscreenBtn.addEventListener('click',()=>{
-  const elem=document.documentElement;
-  if(elem.requestFullscreen){elem.requestFullscreen();}
-  else if(elem.webkitRequestFullscreen){elem.webkitRequestFullscreen();}
-  else if(elem.msRequestFullscreen){elem.msRequestFullscreen();}
-  else if(elem.mozRequestFullScreen){elem.mozRequestFullScreen();}
 });
 </script>
 </body>
